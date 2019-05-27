@@ -1,0 +1,14 @@
+data/*
+__pycache__/
+.idea/workspace.xml
+.idea/*
+*.pyc
+*.xml
+plots/
+*.png
+back*
+mex_hat_func.py
+splineExample.py
+svmRegression.py
+*json*
+*.tar
