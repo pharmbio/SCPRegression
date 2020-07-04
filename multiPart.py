@@ -12,6 +12,9 @@ import RegressionICP as icp
 from perf_measure import pValues2PerfMetrics
 from collections import OrderedDict
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
+import numpy as np
+
+np.random.seed(123)
 
 boxPlot = False
 x = PrettyTable()

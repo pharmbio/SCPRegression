@@ -7,6 +7,8 @@ import dataset_preprocessing as data
 from collections import OrderedDict
 from scp import synergyCP
 import os
+import time
+import numpy as np
 
 
 epsilon = 0.1
@@ -32,8 +34,11 @@ load_functions["Wine"] = data.load_wine_data
 load_functions["GridStability"] = data.load_gridStability_data
 load_functions["SuperConduct"] = data.load_superConduct_data
 
-dataset_names = ['Housing','PD', 'PowerPlant', 'Energy', 'Concrete', 'CBM', 'Game']
+#dataset_names = ['Housing']
 
+np.random.seed(123)
+
+s_time = time.time()
 for dataset_name in dataset_names:
     X, y = load_functions[dataset_name]()
 
@@ -45,7 +50,7 @@ for dataset_name in dataset_names:
     print(dataset_name)
     synergyCP(X, y, n_source=nrSources, methods=methods, path=file_name)
 
-
+print("time taken by linear model: ", time.time()-s_time)
 
 
 

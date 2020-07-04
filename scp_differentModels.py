@@ -7,6 +7,7 @@ import dataset_preprocessing as data
 from collections import OrderedDict
 from scp import synergyCP
 import os
+import numpy as np
 
 
 epsilon = 0.1
@@ -32,7 +33,8 @@ load_functions["Wine"] = data.load_wine_data
 load_functions["GridStability"] = data.load_gridStability_data
 load_functions["SuperConduct"] = data.load_superConduct_data
 
-dataset_names = ['Housing','PD', 'PowerPlant', 'Energy', 'Concrete', 'CBM', 'Game']
+#dataset_names = ['Housing','PD', 'PowerPlant', 'Energy', 'Concrete', 'CBM', 'Game']
+np.random.seed(123)
 
 for dataset_name in dataset_names:
     X, y = load_functions[dataset_name]()

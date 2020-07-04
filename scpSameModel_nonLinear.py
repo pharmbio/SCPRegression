@@ -8,7 +8,9 @@ from collections import OrderedDict
 from scp import synergyCP
 import os
 from prettytable import PrettyTable
+import numpy as np
 
+np.random.seed(123)
 
 x = PrettyTable()
 x.field_names = ["Dataset", "SVR-ICP", "RF-ICP", "RBF-SVR-ICP", 'SCP']

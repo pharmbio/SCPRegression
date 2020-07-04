@@ -12,6 +12,8 @@ from perf_measure import pValues2PerfMetrics
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from collections import OrderedDict
 
+np.random.seed(123)
+
 x = PrettyTable()
 x.field_names = ["Dataset", "SVR-ICP", "RF-ICP", "RBF-SVR-ICP", 'SCP']
 epsilon = 0.1
