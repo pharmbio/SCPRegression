@@ -16,6 +16,8 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from collections import OrderedDict
 import dataset_preprocessing as data
 
+np.random.seed(123)
+
 iteration = 10
 
 def ACP(X, y, n_source = 3, method = 'rf', file =None):

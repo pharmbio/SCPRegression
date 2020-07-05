@@ -33,7 +33,7 @@ load_functions["Wine"] = data.load_wine_data
 load_functions["GridStability"] = data.load_gridStability_data
 load_functions["SuperConduct"] = data.load_superConduct_data
 
-#dataset_names = ['Housing','PD', 'PowerPlant', 'Energy', 'Concrete', 'CBM', 'Game']
+dataset_names = ['Housing']
 np.random.seed(123)
 
 for dataset_name in dataset_names:

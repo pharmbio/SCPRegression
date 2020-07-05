@@ -1,26 +1,26 @@
 """
  Author: Niharika gauraha
- Train SCP on partitions using same algorithm
+ Train ensemble ICP on partitions using same training algorithm
 """
 
 import dataset_preprocessing as data
 from collections import OrderedDict
 from scp import synergyCP
 import os
-from prettytable import PrettyTable
+import time
 import numpy as np
+from ensemble_icp import ensembleICP
 
-np.random.seed(123)
-
-x = PrettyTable()
-x.field_names = ["Dataset", "SVR-ICP", "RF-ICP", "RBF-SVR-ICP", 'SCP']
 
 epsilon = 0.1
 iteration = 10
 nrSources = 3
-methods = ['svr'] * nrSources
+methods = ['linear_svr'] * nrSources
+path = 'json_enicp_sameModel_linear'
 
-dataset_names = ['Housing','PD', 'PowerPlant', 'Energy', 'Concrete', 'CBM', 'Game']
+methods = ['svr'] * nrSources
+path = 'json_enicp_sameModel_nonlinear'
+
 dataset_names = ['Housing', 'Wine', 'PD', 'PowerPlant', 'Energy', 'Concrete',
                      'GridStability', 'SuperConduct', 'CBM', 'Game']
 
@@ -38,20 +38,20 @@ load_functions["Wine"] = data.load_wine_data
 load_functions["GridStability"] = data.load_gridStability_data
 load_functions["SuperConduct"] = data.load_superConduct_data
 
-dataset_names = ['Housing']
+#dataset_names = ['Housing']
 
+np.random.seed(123)
+
+#s_time = time.time()
 for dataset_name in dataset_names:
     X, y = load_functions[dataset_name]()
 
-    if not os.path.exists('json_sameModel_nonlinear'):
-        os.makedirs('json_sameModel_nonlinear')
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-    file_name = "json_sameModel_nonlinear/" + dataset_name + ".json"
+    file_name = path + "/" + dataset_name + ".json"
 
     print(dataset_name)
-    synergyCP(X, y, n_source=nrSources, methods=methods, path=file_name)
+    ensembleICP(X, y, n_source=nrSources, methods=methods, path=file_name)
 
-
-
-
-
+#print("time taken by linear model: ", time.time()-s_time)

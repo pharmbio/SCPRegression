@@ -7,7 +7,7 @@ import json
 # global variables:
 dataset_names = ['Housing', 'Wine', 'PD', 'PowerPlant', 'Energy', 'Concrete',
                      'GridStability', 'SuperConduct', 'CBM', 'Game']
-
+#dataset_names = ['Housing']
 lin_icp = []
 lin_list = []
 rf_icp = []
@@ -252,7 +252,42 @@ def plot_same_data_acp():
 
     print(pt)
 
-plot_same_data()
+
+
+def plot_en_icp():
+    # plot for same model non_linear
+    model = 'ensemble ICP'
+    pt = PrettyTable()
+    pt.field_names = ["Dataset", 'SVR-ICP$_p$', 'RBF-SVR-ICP$_p$', 'Mix-ICP']
+    for dataset_name in dataset_names:
+        file_name = "json_enicp_sameModel_linear/" + dataset_name + ".json"
+        with open(file_name, 'r') as fh:
+            result1 = json.loads(fh.read())
+
+        file_name = "json_enicp_sameModel_nonlinear/" + dataset_name + ".json"
+        with open(file_name, 'r') as fh:
+            result2 = json.loads(fh.read())
+
+        file_name = "json_enicp_diffModel/" + dataset_name + ".json"
+        with open(file_name, 'r') as fh:
+            result3 = json.loads(fh.read())
+
+        source1 = result1["enICP"]
+        source2 = result2["enICP"]
+        source3 = result3["enICP"]
+
+        pt.add_row([dataset_name, round(np.median(source1), 3),
+                    round(np.median(source2), 3),
+                    round(np.median(source3), 3)])
+
+
+        plt.xlim([0, 5])
+
+    print(pt)
+
+
+
+#plot_same_data()
 '''
 print("diff models")
 plot_diff_models()
@@ -261,5 +296,7 @@ plot_same_model_linear()
 print("same models non-lin")
 plot_same_model_nonlinear()
 '''
-print("same data")
-plot_same_data_acp()
+#print("same data")
+#plot_same_data_acp()
+
+plot_en_icp()

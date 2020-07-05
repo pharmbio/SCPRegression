@@ -67,6 +67,7 @@ def synergyCP(X, y, n_source = 3, methods = None, path = None):
             listSmallICPEff[indexSrc].append(eff)
 
             meanCalibConfScore = np.add(meanCalibConfScore, calib_pred)
+            #meanCalibConfScore = np.add(meanCalibConfScore, confScores)
             meanTestPred = np.add(meanTestPred, testPred)
 
         meanCalibConfScore = meanCalibConfScore / n_source
